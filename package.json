@@ -26,6 +26,7 @@
     "bufferutil": "^4.0.1",
     "faker": "^4.1.0",
     "json-server": "^0.16.1",
+    "ng": "0.0.0",
     "node-sass": "^4.14.1",
     "npm-check-updates": "^7.0.2",
     "rxjs": "~6.5.5",
