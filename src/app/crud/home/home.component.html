@@ -1,0 +1,30 @@
+<body>
+<div *ngIf="isDataAvailable">
+  <h1>Quotes (IOF Space)</h1>
+  <!--pre>{{quotes | json}}</pre-->
+  <button width="150px" class="coolButton" type="button" [routerLink]="['/crud/create/']">Create new Quote</button>
+  <!--app-dynamic-form [quotes]="quotes$"-->
+  <table class="blueTable">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Quote</th>
+              <th>Author</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let quote of quotes">
+              <td>{{quote["Quotes.ID"]}}</td>
+              <td>{{quote["Quotes.QUOTATION"]}}</td>
+              <td>{{quote["Quotes.AUTHOR"]}}</td>
+              <td>
+                  <button  width="35px" height="10px" class="coolButton"  type="button" [routerLink]='["/crud/update/", quote["Quotes.ID"]]'>Update</button>
+                  <button  width="35px" height="10px" class="coolButton"  type="button" (click)='delete(quote["Quotes.ID"])'>Remove</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+<!--/app-dynamic-form-->
+</div>
+</body>

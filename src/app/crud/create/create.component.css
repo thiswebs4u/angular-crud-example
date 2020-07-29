@@ -1,0 +1,84 @@
+/* label {
+  padding-left:50px;
+  width:400px;
+  display:inline-block
+} */
+
+/* div.top {
+  padding-left:50px;
+  width:400px; */
+  /* text-transform: uppercase; */
+  /* display:inline-block
+} */
+
+.quoteLabel {
+  vertical-align: top;
+  text-align: left;
+}
+
+h1 {
+  color: #1564ad;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.coolButton {
+	box-shadow: 3px 4px 0px 0px #1564ad;
+	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+	background-color:#79bbff;
+	border-radius:5px;
+	border:1px solid #337bc4;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:11px;
+	font-weight:bold;
+	padding:3px 20px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #528ecc;
+  /* width: 75px; */
+}
+.coolButton:hover {
+	background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+	background-color:#378de5;
+}
+.coolButton:active {
+	position:relative;
+	top:1px;
+}
+
+.descriptionLabel {
+  vertical-align: top;
+  text-align: left;
+}
+
+h1 {
+  text-align: left;
+  padding-left:50px;
+}
+
+
+label {
+  padding-left:50px;
+  width:150px;
+  /* text-transform: uppercase; */
+  display:inline-block
+}
+
+button {
+  /* float: right; */
+  padding-left: 400px;
+  margin-top: 30px;
+  margin-left: 300px;
+
+  /* margin-left: auto; */
+}
+
+input,textarea {
+  width: 250px;
+  margin-top: 5px;
+
+  }

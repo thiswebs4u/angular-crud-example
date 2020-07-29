@@ -1,0 +1,25 @@
+<body>
+<div  *ngIf="isDataAvailable" width="500px">
+  <button width="150px" class="coolButton" type="button" [routerLink]="['/crud/home/']">Home</button>
+
+  <!--pre>{{quoteForm.value | json}}</pre-->
+
+  <h1>Update Product</h1>
+  <form [formGroup]="quoteForm" (ngSubmit)="submitForm()" novalidate>
+      <div class="form-group">
+        <label class="quoteLabel">Quote</label>
+        <textarea class="form-control" id="quotation" formControlName="quotation" rows="5" maxlength="250">
+        </textarea>
+      </div>
+      <div class="form-group">
+          <label>Author</label>
+          <input type="text" id="author" formControlName="author" class="form-control" maxlength="20" >
+      </div>
+      <div class="form-group" style="display: none">
+        <label style="display: none">Id</label>
+        <input style="display: none" type="text" id="id" formControlName="id" class="form-control" maxlength="20">
+    </div>
+      <button class="coolButton"  type="submit">Submit</button>
+  </form>
+</div>
+</body>
