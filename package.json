@@ -27,6 +27,7 @@
     "faker": "^4.1.0",
     "json-server": "^0.16.1",
     "node-sass": "^4.14.1",
+    "npm-check-updates": "^7.0.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "utf-8-validate": "^5.0.2",
