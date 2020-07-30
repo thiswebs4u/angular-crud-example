@@ -1,0 +1,56 @@
+metadata:
+  name: angular-crud
+attributes:
+  persistVolumes: 'false'
+projects:
+  - name: angular-crud-example
+    source:
+      location: 'https://github.com/thiswebs4u/angular-crud-example.git'
+      type: git
+      branch: master
+components:
+  - id: che-incubator/typescript/latest
+    type: chePlugin
+  - mountSources: true
+    endpoints:
+      - name: angular
+        port: 4200
+    memoryLimit: 2Gi
+    type: dockerimage
+    image: 'quay.io/eclipse/che-nodejs10-community:7.10.0'
+    alias: nodejs
+apiVersion: 1.0.0
+commands:
+  - name: start
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/angular-crud-example'
+        type: exec
+        command: yarn run start --host 0.0.0.0 --disableHostCheck true
+        component: nodejs
+  - name: lint
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/angular-crud-example'
+        type: exec
+        command: yarn run lint
+        component: nodejs
+  - name: jsonserver
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/angular-crud-example'
+        type: exec
+        command: >-
+          ${CHE_PROJECTS_ROOT}/angular-crud-example/node_modules/.bin/json-server
+          --id Quotes.ID --watch ./server/database.json --port 3000  --host
+          0.0.0.0 --disableHostCheck true
+        component: nodejs
+  - name: build
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/angular-crud-example'
+        type: exec
+        command: yarn run build
+        component: nodejs
+  - name: yarn install
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/angular-crud-example'
+        type: exec
+        command: yarn install
+        component: nodejs
