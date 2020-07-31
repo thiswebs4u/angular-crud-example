@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
+//import { AppRoutingModule } from './app-routing.module';
 import { CrudRoutingModule } from './crud/crud-routing.module';
+
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { CrudModule } from './crud/crud.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HashLocationStrategy,PathLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 
 // import { DetailsComponent } from './crud/details/details.component';
@@ -29,7 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

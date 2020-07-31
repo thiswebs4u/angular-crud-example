@@ -12,6 +12,8 @@ import { UpdateComponent } from './update/update.component';
 import { CommonModule } from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 //import {MatButtonModule,MatIconModule} from '@angular/material'
+import { HashLocationStrategy,PathLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 
 @NgModule({
