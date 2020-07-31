@@ -18,9 +18,9 @@ export class HomeComponent implements OnInit {
     public crudService: CrudService) { }
 
   ngOnInit() {
-
+console.log("home.ngOnInit");
     this.crudService.getAll().subscribe((data: Quote[])=>{
-      console.log(data);
+      console.log('data',data);
       if(data["Quotes.row"])
         this.quotes = data["Quotes.row"];
       else
