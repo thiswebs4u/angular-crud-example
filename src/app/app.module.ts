@@ -12,6 +12,7 @@ import { CrudModule } from './crud/crud.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy,PathLocationStrategy, LocationStrategy } from '@angular/common';
 
+import { CrudService } from './crud/crud.service';
 
 
 // import { DetailsComponent } from './crud/details/details.component';
@@ -33,7 +34,7 @@ import { HashLocationStrategy,PathLocationStrategy, LocationStrategy } from '@an
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [CrudService,{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

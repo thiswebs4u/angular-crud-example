@@ -3,6 +3,10 @@
 <div *ngIf="isDataAvailable">
   <!--pre>{{quotes | json}}</pre-->
   <button width="150px" class="coolButton" type="button" [routerLink]="['/crud/create/']">Create new Quote</button>
+  <select class="coolButton" (change)="filterServices($event.target.value)" value="${crudService.getServiceId()}">
+    <option value="0">Json Server</option>
+    <option value="1">Fuse Camel</option>
+  </select>
   <!--app-dynamic-form [quotes]="quotes$"-->
   <table class="blueTable">
       <thead>
