@@ -1,5 +1,5 @@
 metadata:
-  name: angular-crud2
+  name: angular-crud
 attributes:
   persistVolumes: 'true'
 projects:
