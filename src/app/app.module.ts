@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
 //import { AppRoutingModule } from './app-routing.module';
@@ -32,9 +32,11 @@ import { CrudService } from './crud/crud.service';
     CommonModule,
     CrudRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CrudModule.forRoot()
   ],
-  providers: [CrudService,{provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

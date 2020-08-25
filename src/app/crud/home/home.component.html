@@ -6,29 +6,34 @@
   <select class="coolButton" (change)="filterServices($event.target.value)" value="${crudService.getServiceId()}">
     <option value="0">Json Server</option>
     <option value="1">Fuse Camel</option>
+    <option value="2">Open Shift</option>
   </select>
+  {{crudService.getServiceId()}}
   <!--app-dynamic-form [quotes]="quotes$"-->
   <table class="blueTable">
-      <thead>
-          <tr>
-              <th>#</th>
-              <th>Quote</th>
-              <th>Author</th>
-              <th>Action</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let quote of quotes">
-              <td>{{quote["Quotes.ID"]}}</td>
-              <td>{{quote["Quotes.QUOTATION"]}}</td>
-              <td>{{quote["Quotes.AUTHOR"]}}</td>
-              <td>
-                  <button  width="35px" height="10px" class="coolButton"  type="button" [routerLink]='["/crud/update/", quote["Quotes.ID"]]'>Update</button>
-                  <button  width="35px" height="10px" class="coolButton"  type="button" (click)='delete(quote["Quotes.ID"])'>Remove</button>
-              </td>
-          </tr>
-      </tbody>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Quote</th>
+      <th>Author</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let quote of quotes">
+      <td>{{quote["id"]}}</td>
+      <td>{{quote["quotation"]}}</td>
+      <td>{{quote["author"]}}</td>
+      <td>
+        <button width="35px" height="10px" class="coolButton" type="button"
+                [routerLink]='["/crud/update/", quote["id"]]'>Update
+        </button>
+        <button width="35px" height="10px" class="coolButton" type="button" (click)='delete(quote["id"])'>Remove
+        </button>
+      </td>
+    </tr>
+    </tbody>
   </table>
-<!--/app-dynamic-form-->
+  <!--/app-dynamic-form-->
 </div>
 </body>

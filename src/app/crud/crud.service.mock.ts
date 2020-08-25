@@ -11,7 +11,7 @@ import { Quote } from './quote';
 })
 export class CrudServiceMock {
 
-  private apiServer = "http://localhost:3000";
+  private apiServer = "http://localhost:9000";
   //private apiServer = "http://localhost:9000";
   //private apiServer = "http://localhost:8080";
 
@@ -54,8 +54,11 @@ export class CrudServiceMock {
   httpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     'Cache-Control': 'no-cache',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    'target': 'jsonserver'
        });
+
+
   options = {
     headers: this.httpHeaders
  };
@@ -73,14 +76,14 @@ export class CrudServiceMock {
     )
   }
   getById(id): Observable<any> {
-    return this.httpClient.get<any>(this.apiServer + '/quotes/' + id)
+    return this.httpClient.get<any>(this.apiServer + '/quotes/' + id,this.options)
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
   getAll(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.apiServer + '/quotes')
+    return this.httpClient.get<any[]>(this.apiServer + '/quotes',this.options)
     .pipe(
       catchError(this.errorHandler)
     )

@@ -1,0 +1,518 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: '1'
+  selfLink: >-
+    /apis/apps/v1/namespaces/n7687c-codeready/deployments/workspace1ylxagr6510lwjz7.nodejs
+  resourceVersion: '421801079'
+  name: workspace1ylxagr6510lwjz7.nodejs
+  uid: beab2fa3-7e8c-4830-9b93-68d03343eb25
+  creationTimestamp: '2020-08-20T20:32:32Z'
+  generation: 1
+  namespace: n7687c-codeready
+  labels:
+    che.workspace_id: workspace1ylxagr6510lwjz7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      che.component.name: nodejs
+      che.deployment_name: workspace1ylxagr6510lwjz7.nodejs
+      che.original_name: nodejs
+      che.workspace_id: workspace1ylxagr6510lwjz7
+      deployment: workspace
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        che.component.name: nodejs
+        che.deployment_name: workspace1ylxagr6510lwjz7.nodejs
+        che.original_name: nodejs
+        che.workspace_id: workspace1ylxagr6510lwjz7
+        deployment: workspace
+      annotations:
+        org.eclipse.che.container.display-name/che-jwtproxyqgdecj4i: che-jwtproxy
+        org.eclipse.che.container.display-name/che-machine-execmz0: che-machine-execmz0
+        org.eclipse.che.container.display-name/nodejs: nodejs
+        org.eclipse.che.container.display-name/theia-idefzj: theia-idefzj
+        org.eclipse.che.container.display-name/vscode-typescriptyw6: vscode-typescriptyw6
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - name: remote-runtime-injectorf1x
+          image: >-
+            registry.redhat.io/codeready-workspaces/theia-endpoint-rhel8@sha256:38ef6428c882032f3109d35f9b9e235cffa5e5e4febf575da1eb1392a831e276
+          env:
+            - name: PLUGIN_REMOTE_ENDPOINT_EXECUTABLE
+              value: /remote-endpoint/plugin-remote-endpoint
+            - name: REMOTE_ENDPOINT_VOLUME_NAME
+              value: remote-endpoint
+            - name: http_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+            - name: no_proxy
+              value: >-
+                *.lmco.com,127.0.0.1,celljr03.cell.ssc.lmco.com,celljr01.cell.ssc.lmco.com,celljr02.cell.ssc.lmco.com,api.cell.ssc.lmco.com,*.cluster.local,.cluster.local,*.lmco.com,.lmco.com,*.svc,.svc,*.cell.ssc.lmco.com,.cell.ssc.lmco.com,*.apps.cell.ssc.lmco.com,.apps.cell.ssc.lmco.com,10.0.0.0/16,10.0.0.0/8,10.254.0.0/16,127.0.0.1,172.17.0.1,172.30.0.0/16,api-int.cell.ssc.lmco.com,etcd-0.cell.ssc.lmco.com,etcd-1.cell.ssc.lmco.com,etcd-2.cell.ssc.lmco.com,localhost,172.30.0.1
+            - name: https_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+          resources: {}
+          volumeMounts:
+            - name: remote-endpoint
+              mountPath: /remote-endpoint
+            - name: che-self-signed-cert
+              readOnly: true
+              mountPath: /tmp/che/secret/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+        - resources:
+            limits:
+              memory: 250Mi
+            requests:
+              memory: 250Mi
+          terminationMessagePath: /dev/termination-log
+          name: pluginbroker-artifacts-rhel8-19ee9a624f
+          env:
+            - name: CHE_AUTH_ENABLED
+              value: 'true'
+            - name: CHE_MACHINE_TOKEN
+              value: >-
+                eyJhbGciOiJSUzI1NiIsImtpbmQiOiJtYWNoaW5lX3Rva2VuIiwia2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyJ9.eyJ3c2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyIsInVpZCI6IjFmMGU4ZGFkLWMxNTctNGQ3ZC1hNTYxLTlkZWNhZWNjOGJkOCIsImF1ZCI6IndvcmtzcGFjZTF5bHhhZ3I2NTEwbHdqejciLCJuYmYiOi0xLCJ1bmFtZSI6Im43Njg3YyIsImlzcyI6IndzbWFzdGVyIiwiZXhwIjoxNjI5NDkxNDk4LCJpYXQiOjE1OTc5NTU0OTgsImp0aSI6ImQwOTgxYjY0LTFmOTItNGQxZi1iMWE5LTFiZWJiNjQyMDZjNiJ9.gKhhmqFoppyK37QHKUKspBHhdiFg58DuPOXcT8Ioqsv84vwE5Bsq6_oGh4JCQxa8_MgQnsxRdZf7NroeW4bTlRIQAwQwKYugQRKiI_3F_4kUqBzRiF9X4IW6wE6PseLq9v7pafZWkqxoqht3ANdjLAMcnffSOD7ClQW-jbetHFXXknekIm0b-zeyKDjyfpoHJTLBAKdFlTXf5djmiflhGDt1BsE2xYA8KBC5S3tveJqdFkk-XQ3FBX_7yiAldK-RUpg6AaXMDJU5tOtlcKvPB3UgXJEBZ-TXMECcIMrNeo7LKRCMEUSQzjz_z2jnblgcC7AmyaJSqGqxezuEVsBAFQ
+            - name: http_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+            - name: no_proxy
+              value: >-
+                *.lmco.com,127.0.0.1,celljr03.cell.ssc.lmco.com,celljr01.cell.ssc.lmco.com,celljr02.cell.ssc.lmco.com,api.cell.ssc.lmco.com,*.cluster.local,.cluster.local,*.lmco.com,.lmco.com,*.svc,.svc,*.cell.ssc.lmco.com,.cell.ssc.lmco.com,*.apps.cell.ssc.lmco.com,.apps.cell.ssc.lmco.com,10.0.0.0/16,10.0.0.0/8,10.254.0.0/16,127.0.0.1,172.17.0.1,172.30.0.0/16,api-int.cell.ssc.lmco.com,etcd-0.cell.ssc.lmco.com,etcd-1.cell.ssc.lmco.com,etcd-2.cell.ssc.lmco.com,localhost,172.30.0.1
+            - name: https_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: broker-config-volumes8drtk
+              readOnly: true
+              mountPath: /broker-config/
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /plugins
+              subPath: workspace1ylxagr6510lwjz7/plugins/
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /workspace_logs
+              subPath: workspace1ylxagr6510lwjz7/che-logs-nodejs/
+            - name: che-self-signed-cert
+              readOnly: true
+              mountPath: /tmp/che/secret/
+          terminationMessagePolicy: File
+          image: >-
+            registry.redhat.io/codeready-workspaces/pluginbroker-artifacts-rhel8@sha256:19ee9a624f66127f224b8e74f5b8c7a9c70eec5d249346157323a59d2e23595a
+          args:
+            - '-push-endpoint'
+            - 'wss://codeready-codeready.apps.cell.ssc.lmco.com/api/websocket'
+            - '-runtime-id'
+            - >-
+              workspace1ylxagr6510lwjz7:default:1f0e8dad-c157-4d7d-a561-9decaecc8bd8
+            - '-cacert'
+            - /tmp/che/secret/ca.crt
+            - '--registry-address'
+            - 'https://plugin-registry-codeready.apps.cell.ssc.lmco.com/v3'
+            - '-metas'
+            - /broker-config/config.json
+      serviceAccountName: che-workspace
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 0
+      securityContext: {}
+      containers:
+        - resources:
+            limits:
+              cpu: 500m
+              memory: '134217728'
+            requests:
+              memory: '134217728'
+          terminationMessagePath: /dev/termination-log
+          name: che-jwtproxyqgdecj4i
+          env:
+            - name: XDG_CONFIG_HOME
+              value: /che-jwtproxy-config
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: che-jwtproxy-config-volume
+              mountPath: /che-jwtproxy-config/
+            - name: che-self-signed-cert
+              readOnly: true
+              mountPath: /tmp/che/secret/
+            - name: workspace1ylxagr6510lwjz7-sshprivatekeys
+              readOnly: true
+              mountPath: /etc/ssh/private
+            - name: ssshkeyconfigvolume
+              readOnly: true
+              mountPath: /etc/ssh/ssh_config
+              subPath: ssh_config
+            - name: gitconfigvolume
+              mountPath: /etc/gitconfig
+              subPath: gitconfig
+          terminationMessagePolicy: File
+          image: >-
+            registry.redhat.io/codeready-workspaces/jwtproxy-rhel8@sha256:4bd319a7069fb10a98545ac927b4b20efa6766b2d1c809447267b6668051a05f
+          args:
+            - '-config'
+            - /che-jwtproxy-config/config.yaml
+        - resources:
+            limits:
+              memory: '1073741824'
+            requests:
+              memory: '209715200'
+          terminationMessagePath: /dev/termination-log
+          name: nodejs
+          env:
+            - name: CHE_WORKSPACE_NAME
+              value: angular-crud
+            - name: CHE_WORKSPACE_LOGS_ROOT__DIR
+              value: /workspace_logs
+            - name: CHE_MACHINE_TOKEN
+              value: >-
+                eyJhbGciOiJSUzI1NiIsImtpbmQiOiJtYWNoaW5lX3Rva2VuIiwia2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyJ9.eyJ3c2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyIsInVpZCI6IjFmMGU4ZGFkLWMxNTctNGQ3ZC1hNTYxLTlkZWNhZWNjOGJkOCIsImF1ZCI6IndvcmtzcGFjZTF5bHhhZ3I2NTEwbHdqejciLCJuYmYiOi0xLCJ1bmFtZSI6Im43Njg3YyIsImlzcyI6IndzbWFzdGVyIiwiZXhwIjoxNjI5NDkxNDk4LCJpYXQiOjE1OTc5NTU0OTgsImp0aSI6ImQwOTgxYjY0LTFmOTItNGQxZi1iMWE5LTFiZWJiNjQyMDZjNiJ9.gKhhmqFoppyK37QHKUKspBHhdiFg58DuPOXcT8Ioqsv84vwE5Bsq6_oGh4JCQxa8_MgQnsxRdZf7NroeW4bTlRIQAwQwKYugQRKiI_3F_4kUqBzRiF9X4IW6wE6PseLq9v7pafZWkqxoqht3ANdjLAMcnffSOD7ClQW-jbetHFXXknekIm0b-zeyKDjyfpoHJTLBAKdFlTXf5djmiflhGDt1BsE2xYA8KBC5S3tveJqdFkk-XQ3FBX_7yiAldK-RUpg6AaXMDJU5tOtlcKvPB3UgXJEBZ-TXMECcIMrNeo7LKRCMEUSQzjz_z2jnblgcC7AmyaJSqGqxezuEVsBAFQ
+            - name: CHE_MACHINE_AUTH_SIGNATURE__ALGORITHM
+              value: RSA
+            - name: CHE_WORKSPACE_NAMESPACE
+              value: n7687c
+            - name: CHE_API_INTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_MACHINE_NAME
+              value: nodejs
+            - name: CHE_WORKSPACE_ID
+              value: workspace1ylxagr6510lwjz7
+            - name: CHE_PROJECTS_ROOT
+              value: /projects
+            - name: CHE_MACHINE_AUTH_SIGNATURE__PUBLIC__KEY
+              value: >-
+                MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAniViVpDgkYbdZ4eCIW3EF0e/4H4QcC4A4V/q/Tt15obM2/pFchPrih4IFfdsxlbTCO1Ioibmbs0D7wc0Lr6Q1y4gqqQlhjQ5NBfGFiaiCaAq+3hbcnnj0EtzMhhGi9/jxOZYd0hG8EKB2cxmWRKufo+f+yVc49vARaMkng037V54RsUG6BQGTX+fcc+tCw7xs6Ob5vgCcibOja+8YYAFTBf5pOZbCZ6be6+XZDAzcc29dKdYHdYEmUxroDqYOvmzN/HBVersdO3EEkahW4hCZP17L/7zOkFuQ0zv5jnmzj9fZfxUdFyYwSkj5jMO//btuH7teyvhxjF1npnGG0fFjQIDAQAB
+            - name: CHE_API
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_API_EXTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: http_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+            - name: no_proxy
+              value: >-
+                *.lmco.com,127.0.0.1,celljr03.cell.ssc.lmco.com,celljr01.cell.ssc.lmco.com,celljr02.cell.ssc.lmco.com,api.cell.ssc.lmco.com,*.cluster.local,.cluster.local,*.lmco.com,.lmco.com,*.svc,.svc,*.cell.ssc.lmco.com,.cell.ssc.lmco.com,*.apps.cell.ssc.lmco.com,.apps.cell.ssc.lmco.com,10.0.0.0/16,10.0.0.0/8,10.254.0.0/16,127.0.0.1,172.17.0.1,172.30.0.0/16,api-int.cell.ssc.lmco.com,etcd-0.cell.ssc.lmco.com,etcd-1.cell.ssc.lmco.com,etcd-2.cell.ssc.lmco.com,localhost,172.30.0.1
+            - name: https_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+          ports:
+            - containerPort: 4200
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /workspace_logs
+              subPath: workspace1ylxagr6510lwjz7/che-logs-nodejs/
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /projects
+              subPath: workspace1ylxagr6510lwjz7/projects/
+            - name: che-self-signed-cert
+              readOnly: true
+              mountPath: /tmp/che/secret/
+            - name: workspace1ylxagr6510lwjz7-sshprivatekeys
+              readOnly: true
+              mountPath: /etc/ssh/private
+            - name: ssshkeyconfigvolume
+              readOnly: true
+              mountPath: /etc/ssh/ssh_config
+              subPath: ssh_config
+            - name: gitconfigvolume
+              mountPath: /etc/gitconfig
+              subPath: gitconfig
+          terminationMessagePolicy: File
+          image: 'quay.io/eclipse/che-nodejs10-community:7.16.0'
+        - resources:
+            limits:
+              memory: '536870912'
+            requests:
+              memory: '67108864'
+          terminationMessagePath: /dev/termination-log
+          name: vscode-typescriptyw6
+          env:
+            - name: THEIA_PLUGINS
+              value: 'local-dir:///plugins/sidecars/che_incubator_typescript_latest'
+            - name: CHE_MACHINE_TOKEN
+              value: >-
+                eyJhbGciOiJSUzI1NiIsImtpbmQiOiJtYWNoaW5lX3Rva2VuIiwia2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyJ9.eyJ3c2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyIsInVpZCI6IjFmMGU4ZGFkLWMxNTctNGQ3ZC1hNTYxLTlkZWNhZWNjOGJkOCIsImF1ZCI6IndvcmtzcGFjZTF5bHhhZ3I2NTEwbHdqejciLCJuYmYiOi0xLCJ1bmFtZSI6Im43Njg3YyIsImlzcyI6IndzbWFzdGVyIiwiZXhwIjoxNjI5NDkxNDk4LCJpYXQiOjE1OTc5NTU0OTgsImp0aSI6ImQwOTgxYjY0LTFmOTItNGQxZi1iMWE5LTFiZWJiNjQyMDZjNiJ9.gKhhmqFoppyK37QHKUKspBHhdiFg58DuPOXcT8Ioqsv84vwE5Bsq6_oGh4JCQxa8_MgQnsxRdZf7NroeW4bTlRIQAwQwKYugQRKiI_3F_4kUqBzRiF9X4IW6wE6PseLq9v7pafZWkqxoqht3ANdjLAMcnffSOD7ClQW-jbetHFXXknekIm0b-zeyKDjyfpoHJTLBAKdFlTXf5djmiflhGDt1BsE2xYA8KBC5S3tveJqdFkk-XQ3FBX_7yiAldK-RUpg6AaXMDJU5tOtlcKvPB3UgXJEBZ-TXMECcIMrNeo7LKRCMEUSQzjz_z2jnblgcC7AmyaJSqGqxezuEVsBAFQ
+            - name: CHE_PROJECTS_ROOT
+              value: /projects
+            - name: CHE_MACHINE_AUTH_SIGNATURE__PUBLIC__KEY
+              value: >-
+                MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAniViVpDgkYbdZ4eCIW3EF0e/4H4QcC4A4V/q/Tt15obM2/pFchPrih4IFfdsxlbTCO1Ioibmbs0D7wc0Lr6Q1y4gqqQlhjQ5NBfGFiaiCaAq+3hbcnnj0EtzMhhGi9/jxOZYd0hG8EKB2cxmWRKufo+f+yVc49vARaMkng037V54RsUG6BQGTX+fcc+tCw7xs6Ob5vgCcibOja+8YYAFTBf5pOZbCZ6be6+XZDAzcc29dKdYHdYEmUxroDqYOvmzN/HBVersdO3EEkahW4hCZP17L/7zOkFuQ0zv5jnmzj9fZfxUdFyYwSkj5jMO//btuH7teyvhxjF1npnGG0fFjQIDAQAB
+            - name: CHE_API
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_WORKSPACE_NAME
+              value: angular-crud
+            - name: CHE_WORKSPACE_LOGS_ROOT__DIR
+              value: /workspace_logs
+            - name: PLUGIN_REMOTE_ENDPOINT_EXECUTABLE
+              value: /remote-endpoint/plugin-remote-endpoint
+            - name: CHE_MACHINE_AUTH_SIGNATURE__ALGORITHM
+              value: RSA
+            - name: CHE_WORKSPACE_NAMESPACE
+              value: n7687c
+            - name: CHE_API_INTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_MACHINE_NAME
+              value: vscode-typescriptyw6
+            - name: CHE_WORKSPACE_ID
+              value: workspace1ylxagr6510lwjz7
+            - name: CHE_API_EXTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: http_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+            - name: no_proxy
+              value: >-
+                *.lmco.com,127.0.0.1,celljr03.cell.ssc.lmco.com,celljr01.cell.ssc.lmco.com,celljr02.cell.ssc.lmco.com,api.cell.ssc.lmco.com,*.cluster.local,.cluster.local,*.lmco.com,.lmco.com,*.svc,.svc,*.cell.ssc.lmco.com,.cell.ssc.lmco.com,*.apps.cell.ssc.lmco.com,.apps.cell.ssc.lmco.com,10.0.0.0/16,10.0.0.0/8,10.254.0.0/16,127.0.0.1,172.17.0.1,172.30.0.0/16,api-int.cell.ssc.lmco.com,etcd-0.cell.ssc.lmco.com,etcd-1.cell.ssc.lmco.com,etcd-2.cell.ssc.lmco.com,localhost,172.30.0.1
+            - name: https_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /plugins
+              subPath: workspace1ylxagr6510lwjz7/plugins/
+            - name: remote-endpoint
+              mountPath: /remote-endpoint
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /workspace_logs
+              subPath: workspace1ylxagr6510lwjz7/che-logs-nodejs/
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /projects
+              subPath: workspace1ylxagr6510lwjz7/projects/
+            - name: che-self-signed-cert
+              readOnly: true
+              mountPath: /tmp/che/secret/
+            - name: workspace1ylxagr6510lwjz7-sshprivatekeys
+              readOnly: true
+              mountPath: /etc/ssh/private
+            - name: ssshkeyconfigvolume
+              readOnly: true
+              mountPath: /etc/ssh/ssh_config
+              subPath: ssh_config
+            - name: gitconfigvolume
+              mountPath: /etc/gitconfig
+              subPath: gitconfig
+          terminationMessagePolicy: File
+          image: >-
+            registry.redhat.io/codeready-workspaces/plugin-java8-rhel8@sha256:b6e36406e7f8ff86f462f370f55143446ceb0c555b86b13593436f5e71b7cab1
+          args:
+            - sh
+            - '-c'
+            - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
+        - resources:
+            limits:
+              memory: '134217728'
+            requests:
+              memory: '67108864'
+          terminationMessagePath: /dev/termination-log
+          name: che-machine-execmz0
+          command:
+            - /go/bin/che-machine-exec
+            - '--url'
+            - '127.0.0.1:4444'
+          env:
+            - name: CHE_WORKSPACE_NAME
+              value: angular-crud
+            - name: CHE_WORKSPACE_LOGS_ROOT__DIR
+              value: /workspace_logs
+            - name: CHE_MACHINE_TOKEN
+              value: >-
+                eyJhbGciOiJSUzI1NiIsImtpbmQiOiJtYWNoaW5lX3Rva2VuIiwia2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyJ9.eyJ3c2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyIsInVpZCI6IjFmMGU4ZGFkLWMxNTctNGQ3ZC1hNTYxLTlkZWNhZWNjOGJkOCIsImF1ZCI6IndvcmtzcGFjZTF5bHhhZ3I2NTEwbHdqejciLCJuYmYiOi0xLCJ1bmFtZSI6Im43Njg3YyIsImlzcyI6IndzbWFzdGVyIiwiZXhwIjoxNjI5NDkxNDk4LCJpYXQiOjE1OTc5NTU0OTgsImp0aSI6ImQwOTgxYjY0LTFmOTItNGQxZi1iMWE5LTFiZWJiNjQyMDZjNiJ9.gKhhmqFoppyK37QHKUKspBHhdiFg58DuPOXcT8Ioqsv84vwE5Bsq6_oGh4JCQxa8_MgQnsxRdZf7NroeW4bTlRIQAwQwKYugQRKiI_3F_4kUqBzRiF9X4IW6wE6PseLq9v7pafZWkqxoqht3ANdjLAMcnffSOD7ClQW-jbetHFXXknekIm0b-zeyKDjyfpoHJTLBAKdFlTXf5djmiflhGDt1BsE2xYA8KBC5S3tveJqdFkk-XQ3FBX_7yiAldK-RUpg6AaXMDJU5tOtlcKvPB3UgXJEBZ-TXMECcIMrNeo7LKRCMEUSQzjz_z2jnblgcC7AmyaJSqGqxezuEVsBAFQ
+            - name: CHE_MACHINE_AUTH_SIGNATURE__ALGORITHM
+              value: RSA
+            - name: CHE_WORKSPACE_NAMESPACE
+              value: n7687c
+            - name: CHE_API_INTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_MACHINE_NAME
+              value: che-machine-execmz0
+            - name: CHE_WORKSPACE_ID
+              value: workspace1ylxagr6510lwjz7
+            - name: CHE_PROJECTS_ROOT
+              value: /projects
+            - name: CHE_MACHINE_AUTH_SIGNATURE__PUBLIC__KEY
+              value: >-
+                MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAniViVpDgkYbdZ4eCIW3EF0e/4H4QcC4A4V/q/Tt15obM2/pFchPrih4IFfdsxlbTCO1Ioibmbs0D7wc0Lr6Q1y4gqqQlhjQ5NBfGFiaiCaAq+3hbcnnj0EtzMhhGi9/jxOZYd0hG8EKB2cxmWRKufo+f+yVc49vARaMkng037V54RsUG6BQGTX+fcc+tCw7xs6Ob5vgCcibOja+8YYAFTBf5pOZbCZ6be6+XZDAzcc29dKdYHdYEmUxroDqYOvmzN/HBVersdO3EEkahW4hCZP17L/7zOkFuQ0zv5jnmzj9fZfxUdFyYwSkj5jMO//btuH7teyvhxjF1npnGG0fFjQIDAQAB
+            - name: CHE_API
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_API_EXTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: http_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+            - name: no_proxy
+              value: >-
+                *.lmco.com,127.0.0.1,celljr03.cell.ssc.lmco.com,celljr01.cell.ssc.lmco.com,celljr02.cell.ssc.lmco.com,api.cell.ssc.lmco.com,*.cluster.local,.cluster.local,*.lmco.com,.lmco.com,*.svc,.svc,*.cell.ssc.lmco.com,.cell.ssc.lmco.com,*.apps.cell.ssc.lmco.com,.apps.cell.ssc.lmco.com,10.0.0.0/16,10.0.0.0/8,10.254.0.0/16,127.0.0.1,172.17.0.1,172.30.0.0/16,api-int.cell.ssc.lmco.com,etcd-0.cell.ssc.lmco.com,etcd-1.cell.ssc.lmco.com,etcd-2.cell.ssc.lmco.com,localhost,172.30.0.1
+            - name: https_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+          ports:
+            - containerPort: 4444
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /workspace_logs
+              subPath: workspace1ylxagr6510lwjz7/che-logs-nodejs/
+            - name: che-self-signed-cert
+              readOnly: true
+              mountPath: /tmp/che/secret/
+            - name: workspace1ylxagr6510lwjz7-sshprivatekeys
+              readOnly: true
+              mountPath: /etc/ssh/private
+            - name: ssshkeyconfigvolume
+              readOnly: true
+              mountPath: /etc/ssh/ssh_config
+              subPath: ssh_config
+            - name: gitconfigvolume
+              mountPath: /etc/gitconfig
+              subPath: gitconfig
+          terminationMessagePolicy: File
+          image: >-
+            registry.redhat.io/codeready-workspaces/machineexec-rhel8@sha256:3aff2947315ac256777fa1409b8f48c8080321d8e5c92167e242c6c72a741de0
+        - resources:
+            limits:
+              memory: 512M
+            requests:
+              memory: '67108864'
+          terminationMessagePath: /dev/termination-log
+          name: theia-idefzj
+          env:
+            - name: THEIA_PLUGINS
+              value: 'local-dir:///plugins'
+            - name: CHE_MACHINE_TOKEN
+              value: >-
+                eyJhbGciOiJSUzI1NiIsImtpbmQiOiJtYWNoaW5lX3Rva2VuIiwia2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyJ9.eyJ3c2lkIjoid29ya3NwYWNlMXlseGFncjY1MTBsd2p6NyIsInVpZCI6IjFmMGU4ZGFkLWMxNTctNGQ3ZC1hNTYxLTlkZWNhZWNjOGJkOCIsImF1ZCI6IndvcmtzcGFjZTF5bHhhZ3I2NTEwbHdqejciLCJuYmYiOi0xLCJ1bmFtZSI6Im43Njg3YyIsImlzcyI6IndzbWFzdGVyIiwiZXhwIjoxNjI5NDkxNDk4LCJpYXQiOjE1OTc5NTU0OTgsImp0aSI6ImQwOTgxYjY0LTFmOTItNGQxZi1iMWE5LTFiZWJiNjQyMDZjNiJ9.gKhhmqFoppyK37QHKUKspBHhdiFg58DuPOXcT8Ioqsv84vwE5Bsq6_oGh4JCQxa8_MgQnsxRdZf7NroeW4bTlRIQAwQwKYugQRKiI_3F_4kUqBzRiF9X4IW6wE6PseLq9v7pafZWkqxoqht3ANdjLAMcnffSOD7ClQW-jbetHFXXknekIm0b-zeyKDjyfpoHJTLBAKdFlTXf5djmiflhGDt1BsE2xYA8KBC5S3tveJqdFkk-XQ3FBX_7yiAldK-RUpg6AaXMDJU5tOtlcKvPB3UgXJEBZ-TXMECcIMrNeo7LKRCMEUSQzjz_z2jnblgcC7AmyaJSqGqxezuEVsBAFQ
+            - name: HOSTED_PLUGIN_PORT
+              value: '3130'
+            - name: THEIA_HOST
+              value: 127.0.0.1
+            - name: CHE_PROJECTS_ROOT
+              value: /projects
+            - name: CHE_MACHINE_AUTH_SIGNATURE__PUBLIC__KEY
+              value: >-
+                MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAniViVpDgkYbdZ4eCIW3EF0e/4H4QcC4A4V/q/Tt15obM2/pFchPrih4IFfdsxlbTCO1Ioibmbs0D7wc0Lr6Q1y4gqqQlhjQ5NBfGFiaiCaAq+3hbcnnj0EtzMhhGi9/jxOZYd0hG8EKB2cxmWRKufo+f+yVc49vARaMkng037V54RsUG6BQGTX+fcc+tCw7xs6Ob5vgCcibOja+8YYAFTBf5pOZbCZ6be6+XZDAzcc29dKdYHdYEmUxroDqYOvmzN/HBVersdO3EEkahW4hCZP17L/7zOkFuQ0zv5jnmzj9fZfxUdFyYwSkj5jMO//btuH7teyvhxjF1npnGG0fFjQIDAQAB
+            - name: CHE_API
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_WORKSPACE_NAME
+              value: angular-crud
+            - name: HOSTED_PLUGIN_HOSTNAME
+              value: 0.0.0.0
+            - name: CHE_WORKSPACE_LOGS_ROOT__DIR
+              value: /workspace_logs
+            - name: CHE_MACHINE_AUTH_SIGNATURE__ALGORITHM
+              value: RSA
+            - name: CHE_WORKSPACE_NAMESPACE
+              value: n7687c
+            - name: CHE_API_INTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: CHE_MACHINE_NAME
+              value: theia-idefzj
+            - name: CHE_WORKSPACE_ID
+              value: workspace1ylxagr6510lwjz7
+            - name: CHE_API_EXTERNAL
+              value: 'https://codeready-codeready.apps.cell.ssc.lmco.com/api'
+            - name: http_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+            - name: no_proxy
+              value: >-
+                *.lmco.com,127.0.0.1,celljr03.cell.ssc.lmco.com,celljr01.cell.ssc.lmco.com,celljr02.cell.ssc.lmco.com,api.cell.ssc.lmco.com,*.cluster.local,.cluster.local,*.lmco.com,.lmco.com,*.svc,.svc,*.cell.ssc.lmco.com,.cell.ssc.lmco.com,*.apps.cell.ssc.lmco.com,.apps.cell.ssc.lmco.com,10.0.0.0/16,10.0.0.0/8,10.254.0.0/16,127.0.0.1,172.17.0.1,172.30.0.0/16,api-int.cell.ssc.lmco.com,etcd-0.cell.ssc.lmco.com,etcd-1.cell.ssc.lmco.com,etcd-2.cell.ssc.lmco.com,localhost,172.30.0.1
+            - name: https_proxy
+              value: 'http://proxy-lmi.global.lmco.com:80'
+          ports:
+            - containerPort: 3100
+              protocol: TCP
+            - containerPort: 3100
+              protocol: TCP
+            - containerPort: 3130
+              protocol: TCP
+            - containerPort: 13131
+              protocol: TCP
+            - containerPort: 13132
+              protocol: TCP
+            - containerPort: 13133
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /plugins
+              subPath: workspace1ylxagr6510lwjz7/plugins/
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /workspace_logs
+              subPath: workspace1ylxagr6510lwjz7/che-logs-nodejs/
+            - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+              mountPath: /projects
+              subPath: workspace1ylxagr6510lwjz7/projects/
+            - name: che-self-signed-cert
+              readOnly: true
+              mountPath: /tmp/che/secret/
+            - name: workspace1ylxagr6510lwjz7-sshprivatekeys
+              readOnly: true
+              mountPath: /etc/ssh/private
+            - name: ssshkeyconfigvolume
+              readOnly: true
+              mountPath: /etc/ssh/ssh_config
+              subPath: ssh_config
+            - name: gitconfigvolume
+              mountPath: /etc/gitconfig
+              subPath: gitconfig
+          terminationMessagePolicy: File
+          image: >-
+            registry.redhat.io/codeready-workspaces/theia-rhel8@sha256:b179f261278812cb565ee18b7249d04283aa30413f161ad12839df0b4f3babc3
+      serviceAccount: che-workspace
+      volumes:
+        - name: che-jwtproxy-config-volume
+          configMap:
+            name: workspace1ylxagr6510lwjz7.jwtproxy-config
+            defaultMode: 420
+        - name: remote-endpoint
+          emptyDir: {}
+        - name: broker-config-volumes8drtk
+          configMap:
+            name: workspace1ylxagr6510lwjz7.broker-config-maplvbvpt
+            defaultMode: 420
+        - name: claim-che-workspace-workspace1ylxagr6510lwjz7
+          persistentVolumeClaim:
+            claimName: claim-che-workspace-workspace1ylxagr6510lwjz7
+        - name: che-self-signed-cert
+          secret:
+            secretName: workspace1ylxagr6510lwjz7-che-self-signed-cert
+            defaultMode: 420
+        - name: workspace1ylxagr6510lwjz7-sshprivatekeys
+          secret:
+            secretName: workspace1ylxagr6510lwjz7-sshprivatekeys
+            defaultMode: 384
+        - name: ssshkeyconfigvolume
+          configMap:
+            name: workspace1ylxagr6510lwjz7-sshconfigmap
+            defaultMode: 420
+        - name: gitconfigvolume
+          configMap:
+            name: workspace1ylxagr6510lwjz7-gitconfig
+            defaultMode: 420
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+status:
+  observedGeneration: 1
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2020-08-20T20:33:24Z'
+      lastTransitionTime: '2020-08-20T20:33:24Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2020-08-20T20:33:24Z'
+      lastTransitionTime: '2020-08-20T20:32:32Z'
+      reason: NewReplicaSetAvailable
+      message: >-
+        ReplicaSet "workspace1ylxagr6510lwjz7.nodejs-5fd5df9cb9" has
+        successfully progressed.
