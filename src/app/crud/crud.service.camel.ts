@@ -3,17 +3,16 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http
 
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { EMPTY } from 'rxjs'
+
 import { Quote } from './quote';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CrudServiceMock {
+export class CrudServiceCamel {
 
-  private apiServer = "http://localhost:3000";
-  //private apiServer = "http://localhost:9000";
-  //private apiServer = "http://localhost:8080";
+  //private apiServer = "http://localhost:3000";
+  private apiServer = "http://localhost:8080";
 
   //POST /quotes/ HTTP/1.1
   //Host: localhost:8080
@@ -63,12 +62,23 @@ export class CrudServiceMock {
   constructor(private httpClient: HttpClient) { }
 
   create(quote): Observable<any> {
-    let postString = {
-            "Quotes.QUOTATION": quote.quotation,
-            "Quotes.AUTHOR": quote.author,
-          }
+    let postString = {"Quotes.row": [
+      {
+        "Quotes.QUOTATION": quote.quotation,
+        "Quotes.AUTHOR": quote.author
+      }
+    ]
+  };
+
+//    return this.httpClient.post<any>(this.apiServer + '/quotes/', JSON.stringify(postString),this.httpOptions)
     return this.httpClient.post<any>(this.apiServer + '/quotes/', postString)
-.pipe(
+        // return this.httpClient.post<any>(this.apiServer + '/quotes/', JSON.stringify(postString) ,
+        // {
+        //  headers: this.httpHeaders,
+        //  observe: "response",
+        //  responseType: "json"
+        //     })
+    .pipe(
       catchError(this.errorHandler)
     )
   }
@@ -80,22 +90,14 @@ export class CrudServiceMock {
   }
 
   getAll(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.apiServer + '/quotes')
+    return this.httpClient.get<any[]>(this.apiServer + '/quotes/')
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
   update(id, quote): Observable<any> {
-    let updateString = {
-      "Quotes.ID": quote.id,
-      "Quotes.QUOTATION": quote.quotation,
-      "Quotes.AUTHOR": quote.author,
-    }
-    console.log("Quotes.ID", quote.id,
-                "Quotes.QUOTATION", quote.quotation,
-                "Quotes.AUTHOR", quote.author);
-    return this.httpClient.put<any>(this.apiServer + '/quotes/' + id, JSON.stringify(updateString), {
+    return this.httpClient.put<any>(this.apiServer + '/quotes/' + id, JSON.stringify(quote), {
       headers: this.httpHeaders,
       observe: "response",
       responseType: "json"
@@ -106,20 +108,24 @@ export class CrudServiceMock {
   }
 
   delete(id){
-    return this.httpClient.delete<any>(this.apiServer + '/quotes/' + id)
+    return this.httpClient.delete<any>(this.apiServer + '/quotes/' + id, {
+      headers: this.httpHeaders,
+      observe: "response",
+      responseType: "json"
+         })
     .pipe(
       catchError(this.errorHandler)
     )
   }
   errorHandler(error) {
      let errorMessage = '';
-     if(error.error instanceof ErrorEvent && error.status != 0) {
+     if(error.error instanceof ErrorEvent) {
        // Get client-side error
        errorMessage = error.error.message;
-     } else if(error.status != 0) {
+     } else {
        // Get server-side error
        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-     } else return EMPTY;
+     }
      console.log(errorMessage);
      return throwError(errorMessage);
   }

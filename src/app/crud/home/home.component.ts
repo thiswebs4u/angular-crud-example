@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CrudService } from '../crud.service.mock';
+import { CrudService } from '../crud.service';
 import { Quote } from '../quote';
 import { Location } from '@angular/common';
 
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     public crudService: CrudService) { }
 
   ngOnInit() {
-console.log("home.ngOnInit");
+    console.log("home.ngOnInit");
     this.crudService.getAll().subscribe((data: Quote[])=>{
       console.log('data',data);
       if(data["Quotes.row"])
@@ -35,6 +35,12 @@ console.log("home.ngOnInit");
         console.log('Quote id = ',id,' deleted');
         location.reload();
       })
+    }
+
+    filterServices(filterId) {
+      this.crudService.setServiceId(filterId);
+      location.reload();
+//      alert('filterId = '+filterId);
     }
 
 }

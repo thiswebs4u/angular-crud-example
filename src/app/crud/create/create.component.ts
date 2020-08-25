@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { CrudService } from '../crud.service';
-import { CrudService } from '../crud.service.mock';
+import { CrudService } from '../crud.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 

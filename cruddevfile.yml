@@ -1,7 +1,7 @@
 metadata:
-  name: angular-crud2
+  name: angular-crud
 attributes:
-  persistVolumes: 'false'
+  persistVolumes: 'true'
 projects:
   - name: angular-crud-example
     source:
@@ -15,7 +15,7 @@ components:
     endpoints:
       - name: angular
         port: 4200
-    memoryLimit: 2Gi
+    memoryLimit: 1G
     type: dockerimage
     image: 'quay.io/eclipse/che-nodejs10-community:7.10.0'
     alias: nodejs
@@ -48,9 +48,15 @@ commands:
         type: exec
         command: yarn run build
         component: nodejs
-  - name: yarn install
+  - name: npm install
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/angular-crud-example'
         type: exec
-        command: yarn install
+        command: npm install --pure-lockfile --ignore-engines
+        component: nodejs
+  - name: remove node_modules
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/angular-crud-example'
+        type: exec
+        command: rm -rf node_modules
         component: nodejs
