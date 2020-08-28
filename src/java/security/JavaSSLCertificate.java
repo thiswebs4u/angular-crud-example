@@ -1,4 +1,4 @@
-package com.kushal.security;
+package security;
 /**
  * @Author Kushal Paudyal
  * www.sanjaal.com/java
@@ -11,29 +11,29 @@ http://blog.icodejava.com/tag/get-public-key-of-ssl-certificate-in-java/
 
  */
 import java.security.cert.Certificate;
- 
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
- 
+
 public class JavaSSLCertificate {
- 
+
 public static void main(String[] argv) throws Exception {
- 
+
 /**
 * 443 is the network port number used by the SSL https: URi scheme.
 */
 int port = 443;
- 
-String hostname = "gmail.com";
- 
+
+String hostname = "qotd-v1.skyapps.ssc.lmco.com";
+
 SSLSocketFactory factory = HttpsURLConnection
 .getDefaultSSLSocketFactory();
- 
+
 System.out.println("Creating a SSL Socket For "+hostname+" on port "+port);
- 
+
 SSLSocket socket = (SSLSocket) factory.createSocket(hostname, port);
- 
+
 /**
 * Starts an SSL handshake on this connection. Common reasons include a
 * need to use new encryption keys, to change cipher suites, or to
@@ -46,10 +46,10 @@ SSLSocket socket = (SSLSocket) factory.createSocket(hostname, port);
 * is complete. Some protocols may not support multiple handshakes on an
 * existing socket and may throw an IOException.
 */
- 
+
 socket.startHandshake();
 System.out.println("Handshaking Complete");
- 
+
 /**
 * Retrieve the server's certificate chain
 *
@@ -65,20 +65,20 @@ System.out.println("Handshaking Complete");
 */
 Certificate[] serverCerts = socket.getSession().getPeerCertificates();
 System.out.println("Retreived Server's Certificate Chain");
- 
+
 System.out.println(serverCerts.length + "Certifcates Foundnnn");
 for (int i = 0; i < serverCerts.length; i++) {
 Certificate myCert = serverCerts[i];
 System.out.println("====Certificate:" + (i+1) + "====");
 System.out.println("-Public Key-n" + myCert.getPublicKey());
 System.out.println("-Certificate Type-n " + myCert.getType());
- 
+
 System.out.println();
 }
- 
+
 socket.close();
 }
- 
+
 /*
 * SANJAAL CORPS MAKES NO REPRESENTATIONS OR WARRANTIES ABOUT THE SUITABILITY OF
 * THE SOFTWARE, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
