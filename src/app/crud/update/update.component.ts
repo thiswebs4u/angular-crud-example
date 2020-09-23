@@ -35,18 +35,49 @@ export class UpdateComponent implements OnInit {
     this.crudService.getById(this.id).subscribe((data: Quote) => {
       let tempQuote: Quote;
 
-      if (data["Quotes.AUTHOR"])
-        tempQuote = {
-          id: data["Quotes.ID"],
-          quotation: data["Quotes.QUOTATION"],
-          author: data["Quotes.AUTHOR"]
-        };
-      else
-        tempQuote = {
-          id: data["QuoteById.row"][0]["QuoteById.ID"],
-          quotation: data["QuoteById.row"][0]["QuoteById.QUOTATION"],
-          author: data["QuoteById.row"][0]["QuoteById.AUTHOR"]
-        };
+      switch (this.crudService.getServiceId()) {
+        case '0':
+          tempQuote = {
+            id: data["Quotes.ID"],
+            quotation: data["Quotes.QUOTATION"],
+            author: data["Quotes.AUTHOR"]
+          };
+          console.log('0');
+          break;
+        case '1':
+          tempQuote = {
+            id: data["QuoteById.row"][0]["QuoteById.ID"],
+            quotation: data["QuoteById.row"][0]["QuoteById.QUOTATION"],
+            author: data["QuoteById.row"][0]["QuoteById.AUTHOR"]
+          };
+          console.log('1');
+          break;
+        case '2':
+          tempQuote = {
+            id: data["data"]["id"],
+            quotation: data["data"]["quotation"],
+            author: data["data"]["author"]
+          };
+            console.log('2');
+          break;
+        default:
+          console.log('Error create quote');
+          return null;
+      }
+
+
+      // if (data["Quotes.AUTHOR"])
+      //   tempQuote = {
+      //     id: data["Quotes.ID"],
+      //     quotation: data["Quotes.QUOTATION"],
+      //     author: data["Quotes.AUTHOR"]
+      //   };
+      // else
+      //   tempQuote = {
+      //     id: data["QuoteById.row"][0]["QuoteById.ID"],
+      //     quotation: data["QuoteById.row"][0]["QuoteById.QUOTATION"],
+      //     author: data["QuoteById.row"][0]["QuoteById.AUTHOR"]
+      //   };
 
       this.quote = tempQuote;
 

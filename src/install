@@ -1,0 +1,11 @@
+export PATH=$PATH:/home/ubuntu/crc-linux-1.16.0-amd64
+rm $HOME/.crc/crc.log
+crc cleanup
+crc config set cpus 4
+crc config set memory 9216
+crc config set pull-secret-file-path ./pull-secret.txt
+#crc config set http-proxy http://proxy1.lmco.com:80
+#crc config set https-proxy http://proxy1.lmco.com:80
+#crc config set no-proxy localhost,127.0.0.1,.lmco.com,*.lmco.com,.testing,*.testing,192.168.130.11
+crc setup --log-level debug
+crc start -n 127.0.0.53 -p pull-secret.txt  --log-level debug

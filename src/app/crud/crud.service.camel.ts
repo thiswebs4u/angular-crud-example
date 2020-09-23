@@ -76,7 +76,13 @@ export class CrudServiceCamel {
 
   update(id, quote, target): Observable<any> {
     this.options.headers = this.httpHeaders.set('target', target);
-    return this.httpClient.put<any>(this.apiServer + '/quotes/' + id, JSON.stringify(quote), this.options)
+    let postString = {
+          "Quotes.ID": quote.id,
+          "Quotes.QUOTATION": quote.quotation,
+          "Quotes.AUTHOR": quote.author
+        };
+
+    return this.httpClient.put<any>(this.apiServer + '/quotes/' + id, JSON.stringify(postString), this.options)
       .pipe(
         catchError(this.errorHandler)
       )
