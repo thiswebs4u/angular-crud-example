@@ -8,7 +8,7 @@ import {CrudServiceMock} from './crud.service.mock'
   providedIn: 'root',
 })
 export class CrudService {
-  private serviceId = '2';
+  private serviceId = '3';
 
   constructor(private httpClient: HttpClient,
               private crudServiceMock: CrudServiceMock,
@@ -40,6 +40,8 @@ export class CrudService {
         return this.crudServiceCamel.create(quote, 'tibco');
       case '2':
         return this.crudServiceCamel.create(quote, 'openshift');
+      case '3':
+        return this.crudServiceMock.create(quote);
       default:
         console.log('Error create quote');
         return null;
@@ -57,6 +59,8 @@ export class CrudService {
       case '2':
         return this.crudServiceCamel.getById(id, 'openshift');
         break;
+      case '3':
+        return this.crudServiceMock.getById(id);
       default:
         console.log('Error create quote');
         return null;
@@ -71,6 +75,8 @@ export class CrudService {
         return this.crudServiceCamel.getAll('tibco');
       case '2':
         return this.crudServiceCamel.getAll('openshift');
+      case '3':
+        return this.crudServiceMock.getAll();
       default:
         console.log('Error create quote');
         return null;
@@ -85,6 +91,8 @@ export class CrudService {
         return this.crudServiceCamel.update(id, quote, 'tibco');
       case '2':
         return this.crudServiceCamel.update(id, quote, 'openshift');
+      case '3':
+        return this.crudServiceMock.update(id,quote);
       default:
         console.log('Error create quote');
         return null;
@@ -99,6 +107,8 @@ export class CrudService {
         return this.crudServiceCamel.delete(id, 'tibco');
       case '2':
         return this.crudServiceCamel.delete(id, 'openshift');
+      case '3':
+        return this.crudServiceMock.delete(id);
       default:
         console.log('Error create quote');
         return null;

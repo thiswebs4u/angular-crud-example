@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start-ng-serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "generate": "node ./server/generateData.js > ./server/database.json",
-    "server": "json-server --id Quotes.ID --watch ./server/database.json"
+    "json-server": "json-server --id Quotes.ID --watch ./server/database.json"
   },
   "private": true,
   "dependencies": {

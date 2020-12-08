@@ -40,6 +40,12 @@ export class HomeComponent implements OnInit {
           this.quotes = data;
           console.log('2');
           break;
+        case '3':
+          this.quotes = data.map(item => {
+            return {id: item['Quotes.ID'], quotation: item['Quotes.QUOTATION'], author: item['Quotes.AUTHOR']};
+          })
+          console.log('3');
+          break;
         default:
           console.log('Error create quote');
           return null;
