@@ -1,4 +1,4 @@
-kubectl -n <namespace> -ojson get service <service>
+kubectl -n foo -ojson get service "<service>"
 
 
 
